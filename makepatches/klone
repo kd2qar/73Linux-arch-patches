@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git clone https://github.com/km4ack/73Linux.git 73Linux
+
+

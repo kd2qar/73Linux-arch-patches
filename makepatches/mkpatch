@@ -1,0 +1,4 @@
+#!/bin/bash
+
+diff -u 73Linux/73.sh 73-patched.sh >../73.sh.patch
+diff -u 73Linux/bin/set-enviroment.sh set-enviroment-patched.sh>../set-enviroment.sh.patch
