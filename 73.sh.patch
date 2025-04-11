@@ -1,0 +1,32 @@
+--- 73Linux/73.sh	2025-04-11 04:06:56.366234461 -0400
++++ 73-patched.sh	2025-04-11 07:42:28.571411202 -0400
+@@ -10,7 +10,7 @@
+ BAPPVER=$(cat ${BAPDIR}/changelog | head -1 | sed 's/version=//')
+ LOGO=${BAPDIR}/data/logo.png
+ TEMPCRON=/run/user/$UID/tempcron.txt
+-
++echo '#!/bin/sh' >${BAPDIR}/bin/./.funfacts
+ 
+ APPLIST=${BAPDIR}/cache/app-list.bap
+ APPPATH=${BAPDIR}/app/stable/
+@@ -235,7 +235,7 @@
+ LOAD_FILES=$(lscpu | grep Architecture: | awk '{print $2}')
+ 
+ case $LOAD_FILES in
+-	armv7l)
++	armv7l | armv6l)
+ 		if [ -n "$COMMUNITY_CK" ]; then
+ 			APPSFILES="${BAPDIR}/app/stable/pi/*.bapp ${BAPDIR}/app/community/pi/*.bapp"
+ 		else
+@@ -253,7 +253,10 @@
+ 		else
+ 			APPSFILES="${BAPDIR}/app/stable/x86_64/*.bapp"
+ 		fi;;
+-
++	*)
++		echo "ARCHITECTURE ${LOAD_FILES} NOT SUPPORTED! GO AWAY!"
++		exit
++		;;
+ esac
+ 
+ export BAPCPU
